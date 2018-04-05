@@ -5,6 +5,8 @@ dnsserver = ['1.1.1.1','4.2.2.1','8.8.8.8','9.9.9.9','80.80.80.80','208.67.222.1
 
 domains = ['google.com', 'amazon.com', 'facebook.com', 'the-morpheus.de']
 
+toplist = []
+
 for i in dnsserver:
 	avg = 0
 	for j in domains:
@@ -19,4 +21,9 @@ for i in dnsserver:
 		except Exception as e:
 			avg = avg + 100000
 	avg = avg / len(domains)
-	print(i + "  -  " + str(avg))
+	toplist.append([i, avg])
+
+toplist = sorted(toplist, key=lambda x: x[1])
+
+for elem in toplist:
+	print("{0:>17} :: {1}".format(elem[0], elem[1]))
